@@ -13,6 +13,14 @@ export const metadata: Metadata = {
 	title: "Notepad Web App",
 	description: "A modern, SEO-optimized online notepad built with Next.js",
 	keywords: "notepad, text editor, online editor, document editor",
+	icons: {
+		icon: [
+			{ url: '/favicon.ico' },
+			{ url: '/icon.png', type: 'image/png' },
+		],
+		shortcut: '/favicon.ico',
+		apple: '/apple-icon.png',
+	},
 };
 
 export default function RootLayout({
