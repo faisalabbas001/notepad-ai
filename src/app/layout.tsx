@@ -10,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-	title: "Notepad Web App",
-	description: "A modern, SEO-optimized online notepad built with Next.js",
+	title: "NotepadAI Online",
+	description: "Modern AI-powered online notepad",
 	keywords: "notepad, text editor, online editor, document editor",
 	icons: {
 		icon: [
