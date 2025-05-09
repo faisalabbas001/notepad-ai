@@ -11,9 +11,9 @@ export default function Navigation() {
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex justify-start h-16">
 					<div className="flex">
-						<div className="flex-shrink-0 flex justify-center items-center h-16 w-full">
+						<a href="/" className="flex-shrink-0 flex justify-center items-center h-16 w-full">
 							<img src="/logo.png" alt="Logo" className="h-12 w-12 md:h-20 md:w-20 lg:h-32 lg:w-32 object-contain" />
-						</div>
+						</a>
 					</div>
 				</div>
 			</div>

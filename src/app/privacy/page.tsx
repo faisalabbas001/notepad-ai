@@ -1,4 +1,13 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "Privacy & Security – How Notepad AI Protects Your Notes",
+	description: "Your words stay yours. Notepad AI processes language locally, avoids external tracking, and provides a trusted space for thought, reflection, and creativity.",
+	alternates: {
+		canonical: "https://www.notepad-ai.online/privacy"
+	}
+};
 
 export default function Privacy() {
 	return (
@@ -12,6 +21,16 @@ export default function Privacy() {
 					At Notepad AI, your privacy isn't an afterthought — it's the foundation. Our platform uses Natural Language Processing (NLP) 
 					to enhance your writing experience without ever compromising your personal data. No sign-ups. No tracking. Just a secure space to write.
 				</p>
+			</section>
+
+            {/* CTA Section */}
+			<section className="text-center mb-16">
+				<Link
+					href="/"
+					className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+				>
+					Start Writing Securely
+				</Link>
 			</section>
 
 			{/* Privacy Features Grid */}
@@ -102,15 +121,7 @@ export default function Privacy() {
 				</div>
 			</section>
 
-			{/* CTA Section */}
-			<section className="text-center">
-				<Link
-					href="/"
-					className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-				>
-					Start Writing Securely
-				</Link>
-			</section>
+			
 		</div>
 	);
 } 

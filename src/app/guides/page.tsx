@@ -1,4 +1,13 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "AI Note-Taking Tips & Productivity Guides",
+	description: "Discover how language intelligence improves everyday writing. Our guides explain how to capture, organize, and expand your thoughts more naturally with AI support.",
+	alternates: {
+		canonical: "https://www.notepad-ai.online/guides"
+	}
+};
 
 export default function Guides() {
 	return (
@@ -12,6 +21,16 @@ export default function Guides() {
 					Welcome to the Notepad AI Blog — your resource hub for smarter writing, faster note-taking, and AI-powered productivity. 
 					Whether you're a student, a professional, or a creative thinker, our guides are crafted using NLP to help you write better and think clearer.
 				</p>
+			</section>
+
+			{/* CTA Section */}
+			<section className="text-center mb-16">
+				<Link
+					href="/"
+					className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+				>
+					Start Writing Now
+				</Link>
 			</section>
 
 			{/* Write Smarter Section */}
@@ -109,15 +128,7 @@ export default function Guides() {
 				</p>
 			</section>
 
-			{/* CTA Section */}
-			<section className="text-center">
-				<Link
-					href="/"
-					className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-				>
-					Start Writing Now
-				</Link>
-			</section>
+			
 		</div>
 	);
 } 

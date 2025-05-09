@@ -22,6 +22,9 @@ export const metadata: Metadata = {
 		shortcut: '/favicon.ico',
 		apple: '/apple-icon.png',
 	},
+	alternates: {
+		canonical: "https://www.notepad-ai.online/"
+	}
 };
 
 export default function RootLayout({

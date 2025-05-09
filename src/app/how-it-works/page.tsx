@@ -1,4 +1,13 @@
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+	title: "How Notepad AI Works – Fast, Smart & Easy Note Taking",
+	description: "Understand how our language engine works with you—detecting meaning, intent, and structure to create a responsive, human-like note-taking experience.",
+	alternates: {
+		canonical: "https://www.notepad-ai.online/how-it-works"
+	}
+};
 
 export default function HowItWorks() {
 	return (
@@ -8,6 +17,16 @@ export default function HowItWorks() {
 				<h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
 					How Notepad AI Works – Fast, Smart & Easy Note Taking
 				</h1>
+			</section>
+
+			{/* CTA Section */}
+			<section className="text-center mb-16">
+				<Link
+					href="/"
+					className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+				>
+					Try Notepad AI Now
+				</Link>
 			</section>
 
 			{/* Main Content Grid */}
@@ -95,15 +114,7 @@ export default function HowItWorks() {
 				</p>
 			</section>
 
-			{/* CTA Section */}
-			<section className="text-center">
-				<Link
-					href="/"
-					className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-				>
-					Try Notepad AI Now
-				</Link>
-			</section>
+			
 		</div>
 	);
 } 

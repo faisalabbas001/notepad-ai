@@ -340,7 +340,7 @@ export default function Editor() {
 	}, [showMobileActions]);
 
 	return (
-		<div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden mx-2 sm:mx-6 my-2">
+		<div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden mx-12 sm:mx-8 md:mx-12 lg:mx-64 my-2">
 			<div className="flex items-center justify-between p-4 sm:p-6 border-b bg-white">
 				<div className="flex items-center space-x-4 sm:space-x-6">
 					{isEditingName ? (

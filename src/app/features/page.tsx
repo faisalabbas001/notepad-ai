@@ -1,4 +1,13 @@
+import { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+	title: "Features of Notepad AI – Auto Save, No Login, Secure Notes",
+	description: "Explore how Notepad AI uses language awareness to enhance your writing experience. Every feature is built to simplify, support, and protect your thoughts as you write.",
+	alternates: {
+		canonical: "https://www.notepad-ai.online/features"
+	}
+};
 
 export default function Features() {
 	return (
@@ -8,6 +17,15 @@ export default function Features() {
 				<h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
 					Features of Notepad AI – Auto Save, No Login, Secure Notes
 				</h1>
+			</section>
+			{/* CTA Section */}
+			<section className="text-center mb-16">
+				<Link
+					href="/"
+					className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+				>
+					Try Notepad AI Now
+				</Link>
 			</section>
 
 			{/* Main Features Grid */}
@@ -111,15 +129,7 @@ export default function Features() {
 				</div>
 			</section>
 
-			{/* CTA Section */}
-			<section className="text-center">
-				<Link
-					href="/"
-					className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-				>
-					Try Notepad AI Now
-				</Link>
-			</section>
+			
 		</div>
 	);
 } 

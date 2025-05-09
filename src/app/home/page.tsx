@@ -1,6 +1,15 @@
 import Link from "next/link";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+	title: "Free Online Notepad – Simple, Secure & Smart",
+	description: "A natural, distraction-free space to write and think clearly. Built with language understanding in mind, Notepad AI helps you express and refine ideas as you go.",
+	alternates: {
+		canonical: "https://www.notepad-ai.online/home"
+	}
+};
 export default function NotepadOnline() {
+	
 	return (
 		<div className="max-w-4xl mx-auto px-4 py-12">
 			{/* Hero Section */}
