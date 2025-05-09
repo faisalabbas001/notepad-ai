@@ -11,9 +11,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-	title: "NotepadAI Online",
-	description: "Modern AI-powered online notepad",
-	keywords: "notepad, text editor, online editor, document editor",
+	title: "Free Online Notepad for Quick Notes – Secure, Simple & Fast",
+	description: "Take notes online with our free notepad. No sign-up, autosave enabled, fast and private. Perfect for writing, editing, and storing notes on the go.",
+	keywords: "online notepad, notepad online, notes online, write notes online, free online notepad, notepad AI, free online notepad with save feature, online notepad without login, secure AI-powered notepad online, AI note-taking tool, online notepad that auto saves, AI notepad for daily notes, fast online notepad for writing, minimal notepad web app, lightweight online notepad tool, AI writing assistant, smart note editor, online text editor with AI, GPT-powered notepad, intelligent online notebook, machine learning note app, context-aware note taking, Notepad AI online, notepad-ai.online, notepad-ai tool, notepad AI web app",
 	icons: {
 		icon: [
 			{ url: '/favicon.ico' },

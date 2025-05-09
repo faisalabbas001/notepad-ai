@@ -1,5 +1,6 @@
 "use client";
 import Editor from "@/components/Editor";
+import Link from "next/link";
 
 export default function Home() {
 	return (
@@ -87,6 +88,16 @@ export default function Home() {
 						Safari, Opera, Microsoft Edge, and Internet Explorer. We also support the Steam browser for gaming enthusiasts. 
 						To ensure optimal performance, please enable JavaScript in your browser settings.
 					</p>
+				</section>
+
+				{/* Learn More Section */}
+				<section className="text-center mt-12">
+					<Link
+						href="/home"
+						className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+					>
+						Learn More About Our Notepad
+					</Link>
 				</section>
 			</div>
 		</main>
