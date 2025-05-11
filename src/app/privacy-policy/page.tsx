@@ -29,7 +29,7 @@ export default function PrivacyPolicy() {
 			{/* Introduction */}
 			<section className="mb-16">
 				<p className="text-lg text-gray-600 mb-8">
-					At Notepad AI, your privacy is not just respected — it's built into our design. This Privacy Policy explains what data we do and do not collect, 
+					At Notepad AI, your privacy is not just respected - it's built into our design. This Privacy Policy explains what data we do and do not collect, 
 					how we handle your content, and your rights as a user.
 				</p>
 			</section>

@@ -25,12 +25,12 @@ export default function About() {
 					It started with frustration.
 				</p>
 				<p className="text-lg text-gray-600 mb-8">
-					I needed a quick, simple way to take notes online — something distraction-free, fast, and reliable. But every tool I tried either felt bloated, 
+					I needed a quick, simple way to take notes online - something distraction-free, fast, and reliable. But every tool I tried either felt bloated, 
 					asked for an account, bombarded me with ads, or missed something essential: it didn't understand how I wanted to write.
 				</p>
 				<p className="text-lg text-gray-600 mb-8">
-					That's when I realized the real problem wasn't just missing features — it was missing understanding. No tool adapted to how I write. 
-					No tool used language as a guide. So I built Notepad AI — a place where writing feels natural, intelligent, and private.
+					That's when I realized the real problem wasn't just missing features - it was missing understanding. No tool adapted to how I write. 
+					No tool used language as a guide. So I built Notepad AI - a place where writing feels natural, intelligent, and private.
 				</p>
 			</section>
 
@@ -44,7 +44,7 @@ export default function About() {
 						You don't have to log in. You don't have to sign up. You just start writing.
 					</p>
 					<p className="text-gray-600">
-						Notepad AI is designed for people like me — people who value clarity over clutter, ideas over interfaces. 
+						Notepad AI is designed for people like me - people who value clarity over clutter, ideas over interfaces. 
 						It's a notepad that works the moment you need it, without asking anything from you.
 					</p>
 				</section>
@@ -55,7 +55,7 @@ export default function About() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">NLP at the Core</h2>
 					<p className="text-gray-600">
 						This isn't just a digital scratchpad. It's powered by Natural Language Processing, which means it understands your writing context as you go. 
-						It's aware of structure, tone, and flow — and adapts quietly in the background to support you, not interrupt you.
+						It's aware of structure, tone, and flow - and adapts quietly in the background to support you, not interrupt you.
 					</p>
 				</section>
 
@@ -65,7 +65,7 @@ export default function About() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Writing Should Be Private</h2>
 					<p className="text-gray-600">
 						Everything happens in your browser. Nothing is stored unless you choose to save it. There's no tracking, no surveillance, and no data mining. 
-						Just you and your thoughts — as it should be.
+						Just you and your thoughts - as it should be.
 					</p>
 				</section>
 
@@ -78,7 +78,7 @@ export default function About() {
 					</p>
 					<p className="text-gray-600">
 						And every time someone else uses Notepad AI and tells me, "This is what I needed," it reminds me why I built it in the first place: 
-						not to impress anyone, but to solve a real need — simply, intelligently, and without compromise.
+						not to impress anyone, but to solve a real need - simply, intelligently, and without compromise.
 					</p>
 				</section>
 			</div>

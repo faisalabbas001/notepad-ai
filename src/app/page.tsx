@@ -43,7 +43,7 @@ export default function Home() {
     <div className="text-center">
       <h3 className="font-semibold text-lg mb-2">Secure, Smart, and Free</h3>
       <p className="text-gray-600">
-        Notepad AI is a secure online notepad with zero ads, zero tracking, and full privacy. It’s the smart way to write notes online — anytime, anywhere.
+        Notepad AI is a secure online notepad with zero ads, zero tracking, and full privacy. It’s the smart way to write notes online - anytime, anywhere.
       </p>
     </div>
   </div>
@@ -61,7 +61,7 @@ export default function Home() {
     <h2 className="text-xl font-bold mb-2">Why Choose a Free Notepad with AI?</h2>
     <hr className="mb-4" />
     <p className="text-gray-700 leading-relaxed">
-      Notepad AI combines simplicity with intelligence. It’s not just a place to type — it's a free AI note-taking tool that supports your thinking. With no login required, NLP-enhanced structuring, and a lightweight interface, you can write and organize your thoughts clearly, safely, and without distraction.
+      Notepad AI combines simplicity with intelligence. It’s not just a place to type - it's a free AI note-taking tool that supports your thinking. With no login required, NLP-enhanced structuring, and a lightweight interface, you can write and organize your thoughts clearly, safely, and without distraction.
     </p>
   </section>
 
@@ -69,7 +69,7 @@ export default function Home() {
     <h2 className="text-xl font-bold mb-2">Accessible Anywhere, Anytime</h2>
     <hr className="mb-4" />
     <p className="text-gray-700 leading-relaxed">
-      Whether you're on mobile or desktop, at home or offline, Notepad AI adapts. It’s designed for everyday use by writers, students, and creators who want a smart, secure place to think and write. All content stays with you — no server storage, no cloud unless you choose.
+      Whether you're on mobile or desktop, at home or offline, Notepad AI adapts. It’s designed for everyday use by writers, students, and creators who want a smart, secure place to think and write. All content stays with you - no server storage, no cloud unless you choose.
     </p>
   </section>
 

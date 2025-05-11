@@ -18,14 +18,14 @@ export default function Offline() {
 					Use Notepad AI Offline – No Internet, No Problem
 				</h1>
 				<p className="text-xl text-gray-600 max-w-3xl mx-auto">
-					Notepad AI isn't just smart — it's independent. With offline mode, you can write notes without an internet connection. 
+					Notepad AI isn't just smart - it's independent. With offline mode, you can write notes without an internet connection. 
 					Powered by in-browser NLP, our tool understands and assists your writing even when you're completely offline.
 				</p>
 			</section>
             {/* Final CTA Section */}
 			<section className="text-center mb-16">
 				<p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-					Use Notepad AI Offline — Because creativity shouldn't depend on Wi-Fi.
+					Use Notepad AI Offline - Because creativity shouldn't depend on Wi-Fi.
 				</p>
 				<Link
 					href="/"
@@ -43,7 +43,7 @@ export default function Offline() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">No Internet Required for Writing</h2>
 					<p className="text-gray-600">
 						Whether you're on a plane, in a remote area, or simply disconnected, Notepad AI continues working without interruption. 
-						The entire notepad — including NLP features — runs locally in your browser. You can write, edit, and auto-save notes with zero connectivity.
+						The entire notepad - including NLP features - runs locally in your browser. You can write, edit, and auto-save notes with zero connectivity.
 					</p>
 				</div>
 
@@ -62,7 +62,7 @@ export default function Offline() {
 					<div className="text-3xl mb-4">💾</div>
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Offline Auto-Save & Session Storage</h2>
 					<p className="text-gray-600">
-						Notes are saved automatically to your local browser storage. This offline-first model ensures that nothing is lost — your content 
+						Notes are saved automatically to your local browser storage. This offline-first model ensures that nothing is lost - your content 
 						is preserved, even if your device goes to sleep or restarts. When you reconnect, sync options are available if enabled.
 					</p>
 				</div>
