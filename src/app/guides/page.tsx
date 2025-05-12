@@ -18,7 +18,7 @@ export default function Guides() {
 					AI Note-Taking Tips & Productivity Guides
 				</h1>
 				<p className="text-xl text-gray-600 max-w-3xl mx-auto">
-					Welcome to the Notepad AI Blog — your resource hub for smarter writing, faster note-taking, and AI-powered productivity. 
+					Welcome to the Notepad AI Blog - your resource hub for smarter writing, faster note-taking, and AI-powered productivity. 
 					Whether you're a student, a professional, or a creative thinker, our guides are crafted using NLP to help you write better and think clearer.
 				</p>
 			</section>
@@ -39,7 +39,7 @@ export default function Guides() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Write Smarter with AI</h2>
 					<p className="text-gray-600 mb-6">
 						What makes AI note-taking different? Natural Language Processing (NLP) allows Notepad AI to recognize your writing patterns, 
-						structure your content automatically, and offer intelligent suggestions. Our blog dives into how to make the most of this — 
+						structure your content automatically, and offer intelligent suggestions. Our blog dives into how to make the most of this - 
 						from using contextual cues to organizing thoughts with semantic flow.
 					</p>
 					<h3 className="text-xl font-semibold mb-4">Popular Guides:</h3>
@@ -70,7 +70,7 @@ export default function Guides() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Take better notes in less time.</h2>
 					<p className="text-gray-600 mb-6">
 						Learn how to optimize your digital note-taking process using features like autosave, context-aware formatting, and no-login access. 
-						Our tips are tailored to how real users engage with online notepads—and enhanced through NLP research.
+						Our tips are tailored to how real users engage with online notepads-and enhanced through NLP research.
 					</p>
 					<h3 className="text-xl font-semibold mb-4">Trending Posts:</h3>
 					<ul className="space-y-3">
@@ -95,7 +95,7 @@ export default function Guides() {
 				<div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 mb-8">
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Real Use Cases, Real Results</h2>
 					<p className="text-gray-600 mb-6">
-						AI note-taking isn't just tech—it's transformation. Our guides explore how real people—from developers to authors—use Notepad AI 
+						AI note-taking isn't just tech-it's transformation. Our guides explore how real people-from developers to authors-use Notepad AI 
 						for everything from meeting notes to creative brainstorming. We explain the NLP under the hood and how it supports different writing styles.
 					</p>
 					<h3 className="text-xl font-semibold mb-4">Example Articles:</h3>
@@ -124,7 +124,7 @@ export default function Guides() {
 					semantic search optimization, and natural language trends.
 				</p>
 				<p className="text-gray-600 text-center font-medium">
-					Ready to explore? Start reading, start writing — and let the language work for you.
+					Ready to explore? Start reading, start writing - and let the language work for you.
 				</p>
 			</section>
 

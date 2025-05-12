@@ -18,7 +18,7 @@ export default function NotepadOnline() {
 					Free Online Notepad – Simple, Secure & Smart
 				</h1>
 				<p className="text-xl text-gray-600 mb-8">
-					Write, edit, and save your notes instantly with our online notepad. No downloads, no sign-up—just a fast, clean, and reliable tool to jot down your thoughts.
+					Write, edit, and save your notes instantly with our online notepad. No downloads, no sign-up-just a fast, clean, and reliable tool to jot down your thoughts.
 				</p>
 				<Link
 					href="/"

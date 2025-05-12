@@ -18,7 +18,7 @@ export default function Privacy() {
 					Privacy & Security – How Notepad AI Protects Your Notes
 				</h1>
 				<p className="text-xl text-gray-600 max-w-3xl mx-auto">
-					At Notepad AI, your privacy isn't an afterthought — it's the foundation. Our platform uses Natural Language Processing (NLP) 
+					At Notepad AI, your privacy isn't an afterthought - it's the foundation. Our platform uses Natural Language Processing (NLP) 
 					to enhance your writing experience without ever compromising your personal data. No sign-ups. No tracking. Just a secure space to write.
 				</p>
 			</section>
@@ -40,7 +40,7 @@ export default function Privacy() {
 					<div className="text-3xl mb-4">🔒</div>
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">No Login Required – Truly Private Note Taking</h2>
 					<p className="text-gray-600">
-						We don't ask for emails or accounts. You can start writing instantly—no barriers, no credentials. Notepad AI is designed for 
+						We don't ask for emails or accounts. You can start writing instantly-no barriers, no credentials. Notepad AI is designed for 
 						private note taking online, where your words stay with you unless you choose to export or sync them.
 					</p>
 				</div>
@@ -51,7 +51,7 @@ export default function Privacy() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">NLP Without Data Extraction</h2>
 					<p className="text-gray-600">
 						Our AI features use client-side NLP, meaning all language understanding happens in your browser. Your content is never sent to 
-						a server for processing. It's local, fast, and secure—just as private note-taking should be.
+						a server for processing. It's local, fast, and secure-just as private note-taking should be.
 					</p>
 				</div>
 
@@ -61,7 +61,7 @@ export default function Privacy() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">No Cloud by Default – Local First</h2>
 					<p className="text-gray-600">
 						Unless you explicitly enable sync, your notes stay entirely in your browser's storage. We don't store, analyze, or transmit 
-						your content behind the scenes. You write, and it stays on your device—protected from external access.
+						your content behind the scenes. You write, and it stays on your device-protected from external access.
 					</p>
 				</div>
 
@@ -71,7 +71,7 @@ export default function Privacy() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Optional Cloud Sync (Encrypted)</h2>
 					<p className="text-gray-600">
 						If you choose to sync notes across devices, your content is encrypted using modern standards. Combined with contextual NLP tagging, 
-						this ensures fast retrieval and meaningful organization—without compromising security.
+						this ensures fast retrieval and meaningful organization-without compromising security.
 					</p>
 				</div>
 			</div>

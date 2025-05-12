@@ -35,7 +35,7 @@ export default function Features() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Smart, AI-Assisted Writing</h2>
 					<p className="text-gray-600">
 						Our online notepad uses AI to help you write better, faster. Whether you're drafting quick notes or composing long-form content, 
-						the built-in NLP engine understands your context and suggests improvements in real time—enhancing grammar, structure, and clarity as you type.
+						the built-in NLP engine understands your context and suggests improvements in real time-enhancing grammar, structure, and clarity as you type.
 					</p>
 				</div>
 
@@ -43,7 +43,7 @@ export default function Features() {
 				<div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Auto-Save Every Word, Instantly</h2>
 					<p className="text-gray-600">
-						Never lose a thought. Our real-time auto-save feature uses NLP-backed detection to identify meaningful text changes and save them instantly—with zero effort on your part. 
+						Never lose a thought. Our real-time auto-save feature uses NLP-backed detection to identify meaningful text changes and save them instantly-with zero effort on your part. 
 						There's no "Save" button. It just works.
 					</p>
 				</div>
@@ -53,7 +53,7 @@ export default function Features() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">No Login Required – Private by Design</h2>
 					<p className="text-gray-600">
 						Write freely without creating an account. Notepad AI respects your privacy. No email, no sign-up, no tracking. 
-						Your content is stored securely in your browser or session—and you're always in control.
+						Your content is stored securely in your browser or session-and you're always in control.
 					</p>
 				</div>
 

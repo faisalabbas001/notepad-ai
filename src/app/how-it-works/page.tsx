@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "How Notepad AI Works – Fast, Smart & Easy Note Taking",
-	description: "Understand how our language engine works with you—detecting meaning, intent, and structure to create a responsive, human-like note-taking experience.",
+	description: "Understand how our language engine works with you-detecting meaning, intent, and structure to create a responsive, human-like note-taking experience.",
 	alternates: {
 		canonical: "https://www.notepad-ai.online/how-it-works"
 	}
@@ -36,7 +36,7 @@ export default function HowItWorks() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Natural Language Processing at the Core</h2>
 					<p className="text-gray-600">
 						Notepad AI is powered by advanced Natural Language Processing (NLP) technology. As you write, the system understands the structure, 
-						context, and intent of your words—just like a human would. This allows it to format, suggest, and improve your notes without needing 
+						context, and intent of your words-just like a human would. This allows it to format, suggest, and improve your notes without needing 
 						commands or formatting rules.
 					</p>
 				</div>
@@ -45,7 +45,7 @@ export default function HowItWorks() {
 				<div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Instant Auto-Save with Context Awareness</h2>
 					<p className="text-gray-600">
-						Our auto-save feature isn't just a timer—it uses NLP to detect when meaningful content changes occur. Whether you're editing a sentence 
+						Our auto-save feature isn't just a timer-it uses NLP to detect when meaningful content changes occur. Whether you're editing a sentence 
 						or writing a list, Notepad AI saves your work instantly and intelligently, preserving version context where needed.
 					</p>
 				</div>
@@ -64,7 +64,7 @@ export default function HowItWorks() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">AI That Understands What You're Writing</h2>
 					<p className="text-gray-600">
 						From recognizing tasks and bullet points to identifying headings and context shifts, Notepad AI uses NLP to make sense of your text. 
-						It reacts to your writing style, helping structure notes without rigid templates. You just write—Notepad AI handles the rest.
+						It reacts to your writing style, helping structure notes without rigid templates. You just write-Notepad AI handles the rest.
 					</p>
 				</div>
 
@@ -73,7 +73,7 @@ export default function HowItWorks() {
 					<h2 className="text-2xl font-bold mb-4 text-blue-600">Lightweight, Yet Intelligent</h2>
 					<p className="text-gray-600">
 						No bulky apps. No distractions. Just a lightweight, AI-enhanced workspace that learns with you. The interface uses semantic cues to adapt 
-						layout, spacing, and tone dynamically—making your writing experience smooth and smart.
+						layout, spacing, and tone dynamically-making your writing experience smooth and smart.
 					</p>
 				</div>
 			</div>
@@ -109,7 +109,7 @@ export default function HowItWorks() {
 			<section className="mb-16 text-center">
 				<h2 className="text-2xl font-bold mb-4">Why It Matters</h2>
 				<p className="text-gray-600 max-w-2xl mx-auto">
-					You don't need to think about how to use Notepad AI. It simply works—with you, for you. From first word to final save, 
+					You don't need to think about how to use Notepad AI. It simply works-with you, for you. From first word to final save, 
 					everything is fast, responsive, and driven by language intelligence.
 				</p>
 			</section>
