@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import "react-quill/dist/quill.snow.css";
 import "@/app/editor.css";
@@ -18,23 +18,38 @@ import {
 	ChevronRightIcon,
 	EllipsisVerticalIcon,
 	ArrowDownTrayIcon,
+	MagnifyingGlassIcon,
+	ArrowPathIcon,
+	XMarkIcon,
 } from "@heroicons/react/24/outline";
 import ExportButton from "./ExportButton";
 import WordCount from "./WordCount";
 import DocumentList from "./DocumentList";
-import Quill from "quill";
 import mammoth from "mammoth";
 
-const ReactQuill = dynamic(() => import("react-quill"), {
-	ssr: false,
-	loading: () => <p>Loading editor...</p>,
-});
+// Dynamically import ReactQuill only on client side
+const ReactQuill = dynamic(
+	async () => {
+		const { default: RQ } = await import('react-quill');
+		// eslint-disable-next-line react/display-name
+		return function comp({ forwardedRef, ...props }: any) {
+			return <RQ ref={forwardedRef} {...props} />;
+		};
+	},
+	{ ssr: false }
+);
 
 interface Document {
 	id: string;
 	name: string;
 	content: string;
 	lastSaved: string;
+	highlights?: HighlightPosition[];
+}
+
+interface HighlightPosition {
+	index: number;
+	length: number;
 }
 
 export default function Editor() {
@@ -52,6 +67,16 @@ export default function Editor() {
 	const [showMobileActions, setShowMobileActions] = useState(false);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const [showMobileToolbar, setShowMobileToolbar] = useState(false);
+	const [showFindReplace, setShowFindReplace] = useState(false);
+	const [findText, setFindText] = useState("");
+	const [replaceText, setReplaceText] = useState("");
+	const [findResults, setFindResults] = useState<number[]>([]);
+	const [currentFindIndex, setCurrentFindIndex] = useState(-1);
+	const [isSearching, setIsSearching] = useState(false);
+	const [searchText, setSearchText] = useState("");
+	const quillRef = useRef<any>(null);
+	const findInputRef = useRef<HTMLInputElement>(null);
+	const [highlightPositions, setHighlightPositions] = useState<HighlightPosition[]>([]);
 
 	// Function to generate unique ID
 	const generateUniqueId = () => {
@@ -69,6 +94,29 @@ export default function Editor() {
 		);
 	};
 
+	const applyHighlights = (positions: HighlightPosition[]) => {
+		if (!quillRef.current || !showFindReplace) return; // Only apply if search is open
+		const quill = quillRef.current.getEditor();
+		
+		// Clear existing highlights first
+		const delta = quill.getContents();
+		delta.ops = delta.ops.map((op: any) => {
+			if (op.attributes) {
+				delete op.attributes['background'];
+				delete op.attributes['class'];
+			}
+			return op;
+		});
+		quill.setContents(delta, 'silent');
+
+		// Apply new highlights
+		positions.forEach((pos, i) => {
+			quill.formatText(pos.index, pos.length, {
+				'background': i === currentFindIndex ? '#ffc107' : '#ffeb3b'
+			}, 'silent');
+		});
+	};
+
 	// Load documents from localStorage on component mount
 	useEffect(() => {
 		const savedDocs = localStorage.getItem("documents");
@@ -81,6 +129,21 @@ export default function Editor() {
 				setDocumentName(lastDoc.name);
 				setContent(lastDoc.content);
 				setLastSaved(lastDoc.lastSaved);
+				setHighlightPositions(lastDoc.highlights || []);
+				
+				// Clear any existing highlights on load
+				if (quillRef.current) {
+					const quill = quillRef.current.getEditor();
+					const delta = quill.getContents();
+					delta.ops = delta.ops.map((op: any) => {
+						if (op.attributes) {
+							delete op.attributes['background'];
+							delete op.attributes['class'];
+						}
+						return op;
+					});
+					quill.setContents(delta, 'silent');
+				}
 			}
 		}
 	}, []);
@@ -92,6 +155,7 @@ export default function Editor() {
 			name: documentName,
 			content,
 			lastSaved: new Date().toLocaleString(),
+			highlights: highlightPositions,
 		};
 
 		const updatedDocs = documents.filter((doc) => doc.id !== currentDocId);
@@ -159,6 +223,7 @@ export default function Editor() {
 	};
 
 	useEffect(() => {
+		
 		const handleFullscreenChange = () => {
 			setIsFullscreen(!!document.fullscreenElement);
 		};
@@ -167,6 +232,7 @@ export default function Editor() {
 		return () => {
 			document.removeEventListener("fullscreenchange", handleFullscreenChange);
 		};
+		
 	}, []);
 
 	const modules = {
@@ -184,6 +250,7 @@ export default function Editor() {
 				[{ font: [] }],
 				[{ script: "sub" }, { script: "super" }],
 				["blockquote", "code-block"],
+				["search"],
 			],
 		},
 	};
@@ -207,6 +274,7 @@ export default function Editor() {
 		"script",
 		"blockquote",
 		"code-block",
+		"search",
 	];
 
 	// Add custom font size styles
@@ -247,6 +315,71 @@ export default function Editor() {
 			return () => {
 				document.head.removeChild(style);
 			};
+		}
+	}, []);
+
+	// Add custom highlight styles
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+		
+		const style = document.createElement("style");
+		style.innerHTML = `
+			.ql-editor .highlight-match {
+				background-color: #ffeb3b !important;
+			}
+			.ql-editor .highlight-current {
+				background-color: #ffc107 !important;
+			}
+		`;
+		document.head.appendChild(style);
+		return () => {
+			document.head.removeChild(style);
+		};
+	}, []);
+
+	// Add custom styles for search button
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const style = document.createElement("style");
+			style.innerHTML = `
+				.ql-search {
+					width: 28px;
+					height: 24px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					cursor: pointer;
+				}
+				.ql-search svg {
+					width: 18px;
+					height: 18px;
+				}
+				.ql-search:hover {
+					color: #06c;
+				}
+			`;
+			document.head.appendChild(style);
+			return () => {
+				document.head.removeChild(style);
+			};
+		}
+	}, []);
+
+	// Add custom search button to toolbar
+	useEffect(() => {
+		if (typeof window === "undefined" || !quillRef.current) return;
+		
+		const toolbar = quillRef.current.getEditor().getModule('toolbar');
+		const searchButton = document.createElement('span');
+		searchButton.className = 'ql-search';
+		searchButton.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+		</svg>`;
+		searchButton.onclick = () => setShowFindReplace(true);
+		
+		const toolbarContainer = document.querySelector('.ql-toolbar');
+		if (toolbarContainer) {
+			toolbarContainer.appendChild(searchButton);
 		}
 	}, []);
 
@@ -339,6 +472,204 @@ export default function Editor() {
 		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, [showMobileActions]);
 
+	// Find and replace functionality
+	const handleFind = (searchValue: string = findText) => {
+		if (typeof window === "undefined" || !searchValue || !quillRef.current) return;
+		
+		const quill = quillRef.current.getEditor();
+		if (!quill) return;
+
+		const text = quill.getText();
+		const results: number[] = [];
+		let index = text.indexOf(searchValue);
+		
+		while (index !== -1) {
+			results.push(index);
+			index = text.indexOf(searchValue, index + 1);
+		}
+		
+		setFindResults(results);
+		setCurrentFindIndex(results.length > 0 ? 0 : -1);
+		
+		// Store highlight positions
+		const positions: HighlightPosition[] = results.map(index => ({
+			index,
+			length: searchValue.length
+		}));
+		setHighlightPositions(positions);
+		
+		// Only apply highlights if search dialog is open
+		if (showFindReplace) {
+			applyHighlights(positions);
+		}
+		
+		// Then immediately restore focus to find input
+		if (findInputRef.current) {
+			findInputRef.current.focus();
+			const length = findInputRef.current.value.length;
+			findInputRef.current.setSelectionRange(length, length);
+		}
+	};
+
+	// Effect to handle search dialog open/close
+	useEffect(() => {
+		if (!quillRef.current) return;
+		const quill = quillRef.current.getEditor();
+
+		if (showFindReplace) {
+			// Show highlights when search is opened
+			applyHighlights(highlightPositions);
+		} else {
+			// Clear highlights when search is closed
+			const delta = quill.getContents();
+			delta.ops = delta.ops.map((op: any) => {
+				if (op.attributes) {
+					delete op.attributes['background'];
+					delete op.attributes['class'];
+				}
+				return op;
+			});
+			quill.setContents(delta, 'silent');
+			
+			// Reset find state
+			setFindText("");
+			setReplaceText("");
+			setFindResults([]);
+			setCurrentFindIndex(-1);
+			setHighlightPositions([]);
+		}
+	}, [showFindReplace]);
+
+	const handleReplace = () => {
+		if (!findText || !replaceText || currentFindIndex === -1 || !quillRef.current) return;
+		
+		const quill = quillRef.current.getEditor();
+		if (!quill) return;
+
+		const index = findResults[currentFindIndex];
+		
+		// Set the selection to the found text
+		quill.setSelection(index, findText.length);
+		
+		// Delete the found text and insert the replacement
+		quill.deleteText(index, findText.length);
+		quill.insertText(index, replaceText);
+		
+		// Update content after replace
+		setContent(quill.root.innerHTML);
+		
+		// Recalculate find results
+		handleFind();
+	};
+
+	const handleReplaceAll = () => {
+		if (!findText || !replaceText || !quillRef.current) return;
+		
+		const quill = quillRef.current.getEditor();
+		if (!quill) return;
+
+		// Get all text content
+		const text = quill.getText();
+		
+		// Create a new text with all replacements
+		const newText = text.replace(new RegExp(findText, 'g'), replaceText);
+		
+		// Update the editor content
+		quill.setText(newText);
+		
+		// Update the content state
+		setContent(quill.root.innerHTML);
+		
+		// Reset find results
+		setFindResults([]);
+		setCurrentFindIndex(-1);
+	};
+
+	const handleFindNext = () => {
+		if (findResults.length === 0 || !quillRef.current) return;
+		
+		const nextIndex = (currentFindIndex + 1) % findResults.length;
+		setCurrentFindIndex(nextIndex);
+		
+		// Only update highlights if search is open
+		if (showFindReplace) {
+			applyHighlights(highlightPositions);
+		}
+		
+		// Then immediately restore focus to find input
+		if (findInputRef.current) {
+			findInputRef.current.focus();
+		}
+	};
+
+	const handleFindPrev = () => {
+		if (findResults.length === 0 || !quillRef.current) return;
+		
+		const prevIndex = (currentFindIndex - 1 + findResults.length) % findResults.length;
+		setCurrentFindIndex(prevIndex);
+		
+		// Only update highlights if search is open
+		if (showFindReplace) {
+			applyHighlights(highlightPositions);
+		}
+		
+		// Then immediately restore focus to find input
+		if (findInputRef.current) {
+			findInputRef.current.focus();
+		}
+	};
+
+	// Handle find input changes
+	const handleFindInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const newValue = e.target.value;
+		setFindText(newValue);
+		handleFind(newValue); // Pass the current input value directly
+	};
+
+	// Add effect to handle find text changes
+	useEffect(() => {
+		if (!findText) {
+			setFindResults([]);
+			setCurrentFindIndex(-1);
+			// Clear highlights when search is cleared
+			if (quillRef.current) {
+				const quill = quillRef.current.getEditor();
+				const delta = quill.getContents();
+				delta.ops = delta.ops.map((op: any) => {
+					if (op.attributes && (op.attributes['background'] || op.attributes['class'])) {
+						delete op.attributes['background'];
+						delete op.attributes['class'];
+					}
+					return op;
+				});
+				quill.setContents(delta);
+			}
+		}
+	}, [findText]);
+
+	// Keyboard shortcuts
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.ctrlKey || e.metaKey) {
+				if (e.key === 'f') {
+					e.preventDefault();
+					setShowFindReplace(true);
+				} else if (e.key === 'h') {
+					e.preventDefault();
+					setShowFindReplace(true);
+				} else if (e.key === 'g' && showFindReplace) {
+					e.preventDefault();
+					handleFindNext();
+				}
+			} else if (e.key === 'Escape' && showFindReplace) {
+				setShowFindReplace(false);
+			}
+		};
+
+		window.addEventListener('keydown', handleKeyDown);
+		return () => window.removeEventListener('keydown', handleKeyDown);
+	}, [showFindReplace, findResults, currentFindIndex]);
+
 	return (
 		<div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden mx-12 sm:mx-8 md:mx-12 lg:mx-64 my-2">
 			<div className="flex items-center justify-between p-4 sm:p-6 border-b bg-white">
@@ -400,6 +731,14 @@ export default function Editor() {
 						) : (
 							<ArrowsPointingOutIcon className="h-5 w-5 text-gray-600" />
 						)}
+					</button>
+					{/* Add Find button */}
+					<button
+						onClick={() => setShowFindReplace(true)}
+						className="hidden sm:inline-flex p-3 hover:bg-gray-100 rounded-lg transition-colors"
+						title="Find and Replace"
+					>
+						<MagnifyingGlassIcon className="h-5 w-5 text-gray-600" />
 					</button>
 					{/* Mobile dropdown for actions */}
 					<div className="relative sm:hidden">
@@ -478,6 +817,68 @@ export default function Editor() {
 				</button>
 				{/* Editor area always flex-1 */}
 				<div className="flex-1 flex flex-col overflow-hidden" ref={editorRef}>
+					{/* Find and Replace Toolbar */}
+					{showFindReplace && (
+						<div className="bg-gray-100 border-b border-gray-200 p-2 flex items-center gap-2">
+							<div className="flex items-center gap-2 flex-1">
+								<input
+									ref={findInputRef}
+									type="text"
+									value={findText}
+									onChange={handleFindInputChange}
+									placeholder="Find..."
+									className="px-3 py-1 border rounded-md flex-1"
+								/>
+								<input
+									type="text"
+									value={replaceText}
+									onChange={(e) => setReplaceText(e.target.value)}
+									placeholder="Replace..."
+									className="px-3 py-1 border rounded-md flex-1"
+								/>
+							</div>
+							<div className="flex items-center gap-1">
+								<button
+									onClick={handleFindPrev}
+									className="p-1 hover:bg-gray-200 rounded"
+									title="Find Previous"
+								>
+									<ChevronLeftIcon className="h-5 w-5" />
+								</button>
+								<button
+									onClick={handleFindNext}
+									className="p-1 hover:bg-gray-200 rounded"
+									title="Find Next"
+								>
+									<ChevronRightIcon className="h-5 w-5" />
+								</button>
+								<button
+									onClick={handleReplace}
+									className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+								>
+									Replace
+								</button>
+								<button
+									onClick={handleReplaceAll}
+									className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+								>
+									Replace All
+								</button>
+								<button
+									onClick={() => setShowFindReplace(false)}
+									className="p-1 hover:bg-gray-200 rounded"
+									title="Close"
+								>
+									<XMarkIcon className="h-5 w-5" />
+								</button>
+							</div>
+							{findResults.length > 0 && (
+								<span className="text-sm text-gray-500">
+									{currentFindIndex + 1} of {findResults.length}
+								</span>
+							)}
+						</div>
+					)}
 					{/* Mobile toolbar button */}
 					<button
 						className="fixed bottom-4 right-4 z-50 sm:hidden bg-blue-600 text-white rounded-full p-3 shadow-lg focus:outline-none"
@@ -494,6 +895,7 @@ export default function Editor() {
 								<div className="flex flex-wrap gap-2 justify-center">
 									{/* Render the Quill toolbar here for mobile */}
 									<ReactQuill
+										forwardedRef={quillRef}
 										theme="snow"
 										value={content}
 										onChange={setContent}
@@ -515,6 +917,7 @@ export default function Editor() {
 					{/* Desktop toolbar/editor as usual */}
 					<div className="flex-1 overflow-y-auto">
 						<ReactQuill
+							forwardedRef={quillRef}
 							theme="snow"
 							value={content}
 							onChange={setContent}
