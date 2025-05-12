@@ -249,8 +249,7 @@ export default function Editor() {
 				[{ color: [] }, { background: [] }],
 				[{ font: [] }],
 				[{ script: "sub" }, { script: "super" }],
-				["blockquote", "code-block"],
-				["search"],
+				["blockquote", "code-block"]
 			],
 		},
 	};
@@ -273,8 +272,7 @@ export default function Editor() {
 		"font",
 		"script",
 		"blockquote",
-		"code-block",
-		"search",
+		"code-block"
 	];
 
 	// Add custom font size styles
@@ -696,6 +694,14 @@ export default function Editor() {
 					</span>
 				</div>
 				<div className="flex items-center space-x-2">
+					{/* Add Find button */}
+					<button
+						onClick={() => setShowFindReplace(true)}
+						className="hidden sm:inline-flex p-3 hover:bg-gray-100 rounded-lg transition-colors"
+						title="Find and Replace"
+					>
+						<MagnifyingGlassIcon className="h-5 w-5 text-gray-600" />
+					</button>
 					<button
 						onClick={createNewDocument}
 						className="p-3 hover:bg-gray-100 rounded-lg transition-colors"
@@ -732,14 +738,7 @@ export default function Editor() {
 							<ArrowsPointingOutIcon className="h-5 w-5 text-gray-600" />
 						)}
 					</button>
-					{/* Add Find button */}
-					<button
-						onClick={() => setShowFindReplace(true)}
-						className="hidden sm:inline-flex p-3 hover:bg-gray-100 rounded-lg transition-colors"
-						title="Find and Replace"
-					>
-						<MagnifyingGlassIcon className="h-5 w-5 text-gray-600" />
-					</button>
+					
 					{/* Mobile dropdown for actions */}
 					<div className="relative sm:hidden">
 						<button
@@ -817,66 +816,77 @@ export default function Editor() {
 				</button>
 				{/* Editor area always flex-1 */}
 				<div className="flex-1 flex flex-col overflow-hidden" ref={editorRef}>
-					{/* Find and Replace Toolbar */}
+					{/* Find and Replace Toolbar - Updated for mobile */}
 					{showFindReplace && (
-						<div className="bg-gray-100 border-b border-gray-200 p-2 flex items-center gap-2">
-							<div className="flex items-center gap-2 flex-1">
-								<input
-									ref={findInputRef}
-									type="text"
-									value={findText}
-									onChange={handleFindInputChange}
-									placeholder="Find..."
-									className="px-3 py-1 border rounded-md flex-1"
-								/>
+						<div className="bg-gray-100 border-b border-gray-200 p-4 flex flex-col gap-4">
+							{/* Find section */}
+							<div className="flex flex-col gap-2">
+								<div className="relative">
+									<input
+										ref={findInputRef}
+										type="text"
+										value={findText}
+										onChange={handleFindInputChange}
+										placeholder="Find..."
+										className="w-full px-3 py-2 border rounded-md"
+									/>
+									{findResults.length > 0 && (
+										<span className="absolute right-2 top-1/2 transform -translate-y-1/2 text-sm text-gray-500">
+											{currentFindIndex + 1} of {findResults.length}
+										</span>
+									)}
+								</div>
+								<div className="flex items-center gap-2">
+									<button
+										onClick={handleFindPrev}
+										className="flex-1 p-2 bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center"
+										title="Find Previous"
+									>
+										<ChevronLeftIcon className="h-5 w-5" />
+									</button>
+									<button
+										onClick={handleFindNext}
+										className="flex-1 p-2 bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center"
+										title="Find Next"
+									>
+										<ChevronRightIcon className="h-5 w-5" />
+									</button>
+								</div>
+							</div>
+
+							{/* Replace section */}
+							<div className="flex flex-col gap-2">
 								<input
 									type="text"
 									value={replaceText}
 									onChange={(e) => setReplaceText(e.target.value)}
 									placeholder="Replace..."
-									className="px-3 py-1 border rounded-md flex-1"
+									className="w-full px-3 py-2 border rounded-md"
 								/>
+								<div className="flex items-center gap-2">
+									<button
+										onClick={handleReplace}
+										className="flex-1 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+									>
+										Replace
+									</button>
+									<button
+										onClick={handleReplaceAll}
+										className="flex-1 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 whitespace-nowrap"
+									>
+										Replace All
+									</button>
+								</div>
 							</div>
-							<div className="flex items-center gap-1">
-								<button
-									onClick={handleFindPrev}
-									className="p-1 hover:bg-gray-200 rounded"
-									title="Find Previous"
-								>
-									<ChevronLeftIcon className="h-5 w-5" />
-								</button>
-								<button
-									onClick={handleFindNext}
-									className="p-1 hover:bg-gray-200 rounded"
-									title="Find Next"
-								>
-									<ChevronRightIcon className="h-5 w-5" />
-								</button>
-								<button
-									onClick={handleReplace}
-									className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-								>
-									Replace
-								</button>
-								<button
-									onClick={handleReplaceAll}
-									className="px-2 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
-								>
-									Replace All
-								</button>
-								<button
-									onClick={() => setShowFindReplace(false)}
-									className="p-1 hover:bg-gray-200 rounded"
-									title="Close"
-								>
-									<XMarkIcon className="h-5 w-5" />
-								</button>
-							</div>
-							{findResults.length > 0 && (
-								<span className="text-sm text-gray-500">
-									{currentFindIndex + 1} of {findResults.length}
-								</span>
-							)}
+
+							{/* Close button */}
+							<button
+								onClick={() => setShowFindReplace(false)}
+								className="p-2 hover:bg-gray-200 rounded self-end"
+								title="Close"
+							>
+								<XMarkIcon className="h-5 w-5" />
+							</button>
 						</div>
 					)}
 					{/* Mobile toolbar button */}
@@ -914,6 +924,14 @@ export default function Editor() {
 							</div>
 						</div>
 					)}
+					{/* Mobile search button */}
+					<button
+						className="fixed bottom-4 right-20 z-50 sm:hidden bg-blue-600 text-white rounded-full p-3 shadow-lg focus:outline-none"
+						onClick={() => setShowFindReplace(true)}
+						aria-label="Find and Replace"
+					>
+						<MagnifyingGlassIcon className="h-6 w-6" />
+					</button>
 					{/* Desktop toolbar/editor as usual */}
 					<div className="flex-1 overflow-y-auto">
 						<ReactQuill
