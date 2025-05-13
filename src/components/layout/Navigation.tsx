@@ -12,7 +12,7 @@ export default function Navigation() {
 				<div className="flex justify-start h-16">
 					<div className="flex">
 						<a href="/" className="flex-shrink-0 flex justify-center items-center h-16 w-full">
-							<img src="/logo.png" alt="Logo" className="h-12 w-12 md:h-20 md:w-20 lg:h-32 lg:w-32 object-contain" />
+							<img src="/logo.png" alt="Logo" className="h-20 w-20 sm:h-24 sm:w-24 md:h-28 md:w-28 lg:h-36 lg:w-36 object-contain" />
 						</a>
 					</div>
 				</div>

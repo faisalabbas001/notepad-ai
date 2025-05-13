@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
-
+import Footer from "@/components/Footer";
 export const metadata: Metadata = {
 	title: "Privacy & Security – How Notepad AI Protects Your Notes",
 	description: "Your words stay yours. Notepad AI processes language locally, avoids external tracking, and provides a trusted space for thought, reflection, and creativity.",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Privacy() {
 	return (
-		<div className="max-w-4xl mx-auto px-4 py-12">
+		<div className="w-3/4 mx-auto px-4 py-12">
 			{/* Hero Section */}
 			<section className="text-center mb-16">
 				<h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -120,8 +120,7 @@ export default function Privacy() {
 					</ul>
 				</div>
 			</section>
-
-			
+			<Footer />
 		</div>
 	);
 } 

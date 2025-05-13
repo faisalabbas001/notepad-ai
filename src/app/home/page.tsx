@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
-
+import Footer from "@/components/Footer";
 export const metadata: Metadata = {
 	title: "Free Online Notepad – Simple, Secure & Smart",
 	description: "A natural, distraction-free space to write and think clearly. Built with language understanding in mind, Notepad AI helps you express and refine ideas as you go.",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function NotepadOnline() {
 	
 	return (
-		<div className="max-w-4xl mx-auto px-4 py-12">
+		<div className="w-3/4 mx-auto px-4 py-12">
 			{/* Hero Section */}
 			<section className="text-center mb-16">
 				<h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -91,6 +91,7 @@ export default function NotepadOnline() {
 					Try It Now - It's Free
 				</Link>
 			</section>
+			<Footer />
 		</div>
 	);
 } 

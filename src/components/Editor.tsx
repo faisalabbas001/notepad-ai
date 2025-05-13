@@ -26,7 +26,6 @@ import ExportButton from "./ExportButton";
 import WordCount from "./WordCount";
 import DocumentList from "./DocumentList";
 import mammoth from "mammoth";
-
 // Dynamically import ReactQuill only on client side
 const ReactQuill = dynamic(
 	async () => {
@@ -669,7 +668,7 @@ export default function Editor() {
 	}, [showFindReplace, findResults, currentFindIndex]);
 
 	return (
-		<div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden mx-12 sm:mx-8 md:mx-12 lg:mx-64 my-2">
+		<div className="flex flex-col h-full bg-white shadow-lg rounded-lg overflow-hidden mx-0 sm:mx-8 md:mx-12 lg:mx-64 my-2">
 			<div className="flex items-center justify-between p-4 sm:p-6 border-b bg-white">
 				<div className="flex items-center space-x-4 sm:space-x-6">
 					{isEditingName ? (
@@ -689,9 +688,6 @@ export default function Editor() {
 							{documentName}
 						</h1>
 					)}
-					<span className="text-sm text-gray-500">
-						Last saved: {lastSaved}
-					</span>
 				</div>
 				<div className="flex items-center space-x-2">
 					{/* Add Find button */}
@@ -704,17 +700,17 @@ export default function Editor() {
 					</button>
 					<button
 						onClick={createNewDocument}
-						className="p-3 hover:bg-gray-100 rounded-lg transition-colors"
+						className="p-2 sm:p-3 hover:bg-gray-100 rounded-lg transition-colors"
 						title="New Document"
 					>
-						<PlusIcon className="h-5 w-5 text-gray-600" />
+						<PlusIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
 					</button>
 					<button
 						onClick={() => fileInputRef.current?.click()}
-						className="p-3 hover:bg-gray-100 rounded-lg transition-colors"
+						className="p-2 sm:p-3 hover:bg-gray-100 rounded-lg transition-colors"
 						title="Open Document"
 					>
-						<FolderOpenIcon className="h-5 w-5 text-gray-600" />
+						<FolderOpenIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-600" />
 					</button>
 					{/* Desktop only actions */}
 					<button
@@ -743,10 +739,10 @@ export default function Editor() {
 					<div className="relative sm:hidden">
 						<button
 							onClick={() => setShowMobileActions((v) => !v)}
-							className="p-3 hover:bg-gray-100 rounded-lg transition-colors"
+							className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
 							title="More actions"
 						>
-							<EllipsisVerticalIcon className="h-6 w-6 text-gray-600" />
+							<EllipsisVerticalIcon className="h-4 w-4 text-gray-600" />
 						</button>
 						{showMobileActions && (
 							<div ref={dropdownRef} className="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
@@ -754,22 +750,22 @@ export default function Editor() {
 									onClick={() => { setShowMobileActions(false); handlePrint(); }}
 									className="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100"
 								>
-									<PrinterIcon className="h-5 w-5 mr-2" /> Print
+									<PrinterIcon className="h-4 w-4 mr-2" /> Print
 								</button>
 								<button
 									onClick={() => { setShowMobileActions(false); /* trigger export logic here */ }}
 									className="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100"
 								>
-									<ArrowDownTrayIcon className="h-5 w-5 mr-2" /> Export
+									<ArrowDownTrayIcon className="h-4 w-4 mr-2" /> Export
 								</button>
 								<button
 									onClick={() => { setShowMobileActions(false); handleFullscreen(); }}
 									className="w-full flex items-center px-4 py-2 text-gray-700 hover:bg-gray-100"
 								>
 									{isFullscreen ? (
-										<ArrowsPointingInIcon className="h-5 w-5 mr-2" />
+										<ArrowsPointingInIcon className="h-4 w-4 mr-2" />
 									) : (
-										<ArrowsPointingOutIcon className="h-5 w-5 mr-2" />
+										<ArrowsPointingOutIcon className="h-4 w-4 mr-2" />
 									)}
 									{isFullscreen ? "Exit Fullscreen" : "Fullscreen"}
 								</button>
@@ -945,7 +941,12 @@ export default function Editor() {
 						/>
 					</div>
 					<div className="border-t p-4 bg-gray-50">
-						<WordCount content={content} />
+						<div className="flex items-center justify-between">
+							<WordCount content={content} />
+							<span className="text-sm text-gray-500">
+								Last saved: {lastSaved}
+							</span>
+						</div>
 					</div>
 				</div>
 			</div>

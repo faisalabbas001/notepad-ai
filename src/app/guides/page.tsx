@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
-
+import Footer from "@/components/Footer";
 export const metadata: Metadata = {
 	title: "AI Note-Taking Tips & Productivity Guides",
 	description: "Discover how language intelligence improves everyday writing. Our guides explain how to capture, organize, and expand your thoughts more naturally with AI support.",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Guides() {
 	return (
-		<div className="max-w-4xl mx-auto px-4 py-12">
+		<div className="w-3/4 mx-auto px-4 py-12">
 			{/* Hero Section */}
 			<section className="text-center mb-16">
 				<h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -127,8 +127,7 @@ export default function Guides() {
 					Ready to explore? Start reading, start writing - and let the language work for you.
 				</p>
 			</section>
-
-			
+			<Footer />
 		</div>
 	);
 } 

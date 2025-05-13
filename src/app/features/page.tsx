@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-
+import Footer from "@/components/Footer";
 export const metadata: Metadata = {
 	title: "Features of Notepad AI – Auto Save, No Login, Secure Notes",
 	description: "Explore how Notepad AI uses language awareness to enhance your writing experience. Every feature is built to simplify, support, and protect your thoughts as you write.",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function Features() {
 	return (
-		<div className="max-w-4xl mx-auto px-4 py-12">
+		<div className="w-3/4 mx-auto px-4 py-12">
 			{/* Hero Section */}
 			<section className="text-center mb-16">
 				<h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -128,8 +128,7 @@ export default function Features() {
 					</div>
 				</div>
 			</section>
-
-			
+			<Footer />
 		</div>
 	);
 } 

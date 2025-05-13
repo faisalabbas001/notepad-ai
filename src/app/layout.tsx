@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 import Script from "next/script";
+import Footer from "@/components/Footer";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -49,13 +50,14 @@ export default function RootLayout({
 				</Script>
 			</head>
 			<body className="min-h-full bg-gray-50">
-				<div className="min-h-full">
+				<div className="flex flex-col min-h-screen">
 					<Navigation />
 					<main className="h-[calc(100vh-4rem)]">
 						<div className="h-full px-8 lg:px-12 py-6">
 							{children}
 						</div>
 					</main>
+					
 				</div>
 			</body>
 		</html>

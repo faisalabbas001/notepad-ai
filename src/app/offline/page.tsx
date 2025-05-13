@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
-
+import Footer from "@/components/Footer";
 export const metadata: Metadata = {
 	title: "Use Notepad AI Offline – No Internet, No Problem",
 	description: "Thoughts don't wait for Wi-Fi. With offline language processing, Notepad AI stays responsive and context-aware, even without an internet connection.",
@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 };
 
 export default function Offline() {
-	return (
-		<div className="max-w-4xl mx-auto px-4 py-12">
+		return (
+			<div className="w-3/4 mx-auto px-4 py-12">
 			{/* Hero Section */}
 			<section className="text-center mb-16">
 				<h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -126,8 +126,7 @@ export default function Offline() {
 					</ul>
 				</div>
 			</section>
-
-			
+			<Footer />
 		</div>
 	);
 } 
