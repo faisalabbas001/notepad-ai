@@ -6,7 +6,8 @@ export const metadata: Metadata = {
 	description: "Explore how Notepad AI uses language awareness to enhance your writing experience. Every feature is built to simplify, support, and protect your thoughts as you write.",
 	alternates: {
 		canonical: "https://www.notepad-ai.online/features"
-	}
+	},
+	applicationName: "Online Notepad",
 };
 
 export default function Features() {

@@ -6,7 +6,8 @@ export const metadata: Metadata = {
 	description: "Discover how language intelligence improves everyday writing. Our guides explain how to capture, organize, and expand your thoughts more naturally with AI support.",
 	alternates: {
 		canonical: "https://www.notepad-ai.online/guides"
-	}
+	},
+	applicationName: "Online Notepad",
 };
 
 export default function Guides() {

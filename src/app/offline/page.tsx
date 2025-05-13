@@ -6,7 +6,8 @@ export const metadata: Metadata = {
 	description: "Thoughts don't wait for Wi-Fi. With offline language processing, Notepad AI stays responsive and context-aware, even without an internet connection.",
 	alternates: {
 		canonical: "https://www.notepad-ai.online/offline"
-	}
+	},
+	applicationName: "Online Notepad",
 };
 
 export default function Offline() {

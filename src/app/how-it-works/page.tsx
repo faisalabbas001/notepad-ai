@@ -6,7 +6,8 @@ export const metadata: Metadata = {
 	description: "Understand how our language engine works with you-detecting meaning, intent, and structure to create a responsive, human-like note-taking experience.",
 	alternates: {
 		canonical: "https://www.notepad-ai.online/how-it-works"
-	}
+	},
+	applicationName: "Online Notepad",
 };
 
 export default function HowItWorks() {

@@ -6,7 +6,8 @@ export const metadata: Metadata = {
 	description: "A natural, distraction-free space to write and think clearly. Built with language understanding in mind, Notepad AI helps you express and refine ideas as you go.",
 	alternates: {
 		canonical: "https://www.notepad-ai.online/home"
-	}
+	},
+	applicationName: "Online Notepad",
 };
 export default function NotepadOnline() {
 	

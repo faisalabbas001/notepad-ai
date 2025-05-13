@@ -6,7 +6,8 @@ export const metadata: Metadata = {
 	description: "Your words stay yours. Notepad AI processes language locally, avoids external tracking, and provides a trusted space for thought, reflection, and creativity.",
 	alternates: {
 		canonical: "https://www.notepad-ai.online/privacy"
-	}
+	},
+	applicationName: "Online Notepad",
 };
 
 export default function Privacy() {

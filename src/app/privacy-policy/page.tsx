@@ -6,7 +6,8 @@ export const metadata: Metadata = {
 	description: "Learn how Notepad AI protects your privacy with client-side storage, no data collection, and optional encrypted sync.",
 	alternates: {
 		canonical: "https://www.notepad-ai.online/privacy-policy"
-	}
+	},
+	applicationName: "Online Notepad",
 };
 
 export default function PrivacyPolicy() {

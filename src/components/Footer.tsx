@@ -31,18 +31,43 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/guides"
+                  href="/text-to-docs"
                   className="text-gray-600 hover:text-blue-600"
                 >
-                  Guides
+                  Text to Docs
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/text-to-pdf"
+                  className="text-gray-600 hover:text-blue-600"
+                >
+                  Text to PDF
+                </Link>
+              </li>
+              
+              
+            </ul>
+          </div>
+
+          {/* Features */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4"></h3>
+            <ul className="space-y-2">
+            <li>
                 <Link
                   href="/how-it-works"
                   className="text-gray-600 hover:text-blue-600"
                 >
                   How it works
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/guides"
+                  className="text-gray-600 hover:text-blue-600"
+                >
+                  Guides
                 </Link>
               </li>
               <li>
@@ -61,14 +86,6 @@ export default function Footer() {
                   Privacy
                 </Link>
               </li>
-            </ul>
-          </div>
-
-          {/* Features */}
-          <div>
-            <h3 className="text-lg font-semibold mb-4"></h3>
-            <ul className="space-y-2">
-              
               <li>
                 <Link
                   href="/about-us"

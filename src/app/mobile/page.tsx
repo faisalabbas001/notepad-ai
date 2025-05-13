@@ -6,7 +6,8 @@ export const metadata: Metadata = {
 	description: "Language adapts to your world. Write freely from any device with an AI that understands how you think-even on the go.",
 	alternates: {
 		canonical: "https://www.notepad-ai.online/mobile"
-	}
+	},
+	applicationName: "Online Notepad",
 };
 
 export default function Mobile() {
