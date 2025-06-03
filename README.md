@@ -138,4 +138,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Next.js team for the amazing framework
 - Quill.js for the rich text editor
-- All contributors who have helped shape this project 
+- All contributors who have helped shape this project # notepad-ai

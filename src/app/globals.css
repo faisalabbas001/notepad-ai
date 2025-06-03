@@ -12,3 +12,402 @@ body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-start-rgb));
 }
+
+/* Add these new styles */
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, #0001 1px, transparent 1px),
+    linear-gradient(to bottom, #0001 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Enhanced scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Noise texture */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+}
+
+/* Animated pulse */
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.2; }
+}
+
+.animate-pulse {
+  animation: pulse 10s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Delayed animation */
+.delay-1000 {
+  animation-delay: 1000ms;
+}
+
+/* Grid pattern */
+.bg-grid-pattern {
+  background-size: 30px 30px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+}
+
+/* Enhanced blur for glass effect */
+.backdrop-blur-custom {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Particle Animation */
+.particles-container {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  background: #fff;
+  border-radius: 50%;
+  left: var(--x);
+  top: var(--y);
+  opacity: 0;
+  animation: float-particle 20s infinite linear;
+  animation-delay: var(--delay);
+  box-shadow: 0 0 10px #fff;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translate(0, 0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translate(100px, -100px);
+    opacity: 0;
+  }
+}
+
+/* Neural Network Effect */
+.neural-node {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #4a90e2;
+  border-radius: 50%;
+  animation: pulse-node 4s infinite;
+}
+
+@keyframes pulse-node {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(2);
+    opacity: 0.7;
+  }
+}
+
+/* Wave Animation */
+.wave-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.1;
+}
+
+.wave {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, #4a90e2, #00ff9d);
+  opacity: 0.3;
+  animation: wave 8s infinite linear;
+}
+
+.wave2 { animation-delay: -2s; }
+.wave3 { animation-delay: -4s; }
+
+@keyframes wave {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* AI Pulse Effect */
+.ai-pulse {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 0%, #4a90e2 50%, transparent 100%);
+  opacity: 0.1;
+  animation: ai-pulse 4s infinite;
+}
+
+@keyframes ai-pulse {
+  0%, 100% {
+    transform: scale(0.8);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.2;
+  }
+}
+
+/* Matrix Rain Effect */
+.matrix-rain {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, 
+    transparent 0%,
+    rgba(74, 144, 226, 0.1) 50%,
+    transparent 100%
+  );
+  background-size: 100% 200%;
+  animation: matrix-rain 8s linear infinite;
+}
+
+@keyframes matrix-rain {
+  0% {
+    background-position: 0 -100%;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+/* Enhance existing noise texture */
+.bg-noise {
+  animation: noise 8s steps(10) infinite;
+}
+
+@keyframes noise {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(5%, 5%); }
+  30% { transform: translate(-5%, 5%); }
+  40% { transform: translate(5%, -5%); }
+  50% { transform: translate(-5%, -5%); }
+  60% { transform: translate(5%, 5%); }
+  70% { transform: translate(-5%, 5%); }
+  80% { transform: translate(5%, -5%); }
+  90% { transform: translate(-5%, -5%); }
+}
+
+/* Glowing orbs */
+.glow-orb {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: glow 8s infinite ease-in-out;
+}
+
+.glow-orb:nth-child(1) {
+  background: rgba(52, 152, 219, 0.3);
+  animation-delay: 0s;
+}
+
+.glow-orb:nth-child(2) {
+  background: rgba(155, 89, 182, 0.3);
+  animation-delay: -2s;
+}
+
+.glow-orb:nth-child(3) {
+  background: rgba(46, 204, 113, 0.3);
+  animation-delay: -4s;
+}
+
+@keyframes glow {
+  0%, 100% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.5) translate(50px, 20px);
+    opacity: 0.6;
+  }
+}
+
+/* Neural network lines */
+.neural-line {
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(52, 152, 219, 0.3) 50%,
+    transparent 100%
+  );
+  transform: rotate(var(--rotation));
+  animation: pulse-line 4s infinite ease-in-out;
+  animation-delay: var(--delay);
+}
+
+@keyframes pulse-line {
+  0%, 100% {
+    opacity: 0.1;
+    transform: rotate(var(--rotation)) scale(0.8);
+  }
+  50% {
+    opacity: 0.4;
+    transform: rotate(var(--rotation)) scale(1.2);
+  }
+}
+
+/* Processing circles */
+.processing-circles {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  position: absolute;
+  border: 2px solid rgba(52, 152, 219, 0.3);
+  border-radius: 50%;
+  animation: process 6s infinite ease-in-out;
+}
+
+.circle-1 {
+  width: 100px;
+  height: 100px;
+  animation-delay: 0s;
+}
+
+.circle-2 {
+  width: 200px;
+  height: 200px;
+  animation-delay: -2s;
+}
+
+.circle-3 {
+  width: 300px;
+  height: 300px;
+  animation-delay: -4s;
+}
+
+@keyframes process {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.1;
+  }
+}
+
+/* Gradient mesh */
+.gradient-mesh {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(155, 89, 182, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(46, 204, 113, 0.1) 0%, transparent 50%);
+  animation: mesh-move 20s infinite linear;
+}
+
+@keyframes mesh-move {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(20px, 20px) scale(1.1);
+  }
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* Grid overlay */
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-float 15s infinite linear;
+}
+
+@keyframes grid-float {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+/* Performance optimization */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body[data-modal-open="true"] {
+  @apply overflow-hidden;
+}
+
+body[data-modal-open="true"] > *:not(.modal) {
+  @apply blur-sm brightness-50;
+}
+
+.modal {
+  @apply !blur-none !brightness-100;
+}
