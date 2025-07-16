@@ -8,7 +8,7 @@ import { motion } from "framer-motion"; // Use named export
 
 export default function Features() {
   return (
-    <div className="min-h-screen  text-white px-4 mt-20 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen main-container  text-white px-4 mt-20 sm:px-6 lg:px-8 py-12">
       {/* Hero Section */}
       <section className="text-center mb-16">
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">

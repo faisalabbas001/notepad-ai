@@ -107,8 +107,8 @@ export default function RootLayout({
 				{/* Main content */}
 				<div className="relative z-10 flex flex-col min-h-screen">
 					<Navigation />
-					<main className="h-[calc(100vh-4rem)]">
-						<div className="h-full px-8 lg:px-12 py-6 backdrop-blur-[3px]">
+					<main className="h-[calc(100vh-4rem)] mt-16 ">
+						<div className=" px-8 lg:px-12  backdrop-blur-[3px]">
 							{children}
 							<Footer />
 						</div>

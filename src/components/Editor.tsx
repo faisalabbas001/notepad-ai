@@ -854,7 +854,7 @@ export default function Editor({
 
 	return (
 		<>
-			<div className={`flex  flex-col h-full bg-[#1a1f2e]/90 backdrop-blur-sm rounded-lg overflow-hidden mx-0 sm:mx-8 md:mx-12 lg:mx-64 my-20 border border-[#2a3142] shadow-2xl ${
+			<div className={`flex flex-col main-container h-[calc(100vh-72px)] min-h-0 bg-[#1a1f2e]/90 backdrop-blur-sm rounded-lg overflow-hidden mb-12 border border-[#2a3142] shadow-2xl ${
 				(showSaveModal || showShareModal) ? 'blur-sm' : ''
 			}`}>
 				{/* Header section */}
@@ -948,7 +948,7 @@ export default function Editor({
 </div>
 
 				{/* Editor area */}
-				<div className="flex-1 flex flex-col overflow-hidden" ref={editorRef}>
+				<div className="flex-1 flex flex-col min-h-0" ref={editorRef}>
 					{/* Custom Quill styles */}
 					<style jsx global>{`
 						.ql-toolbar.ql-snow {
@@ -984,7 +984,7 @@ export default function Editor({
 							stroke: #e5e7eb !important;
 						}
 
-						.ql-fill {
+						120px.ql-fill {
 							fill: #e5e7eb !important;
 						}
 
@@ -1110,21 +1110,22 @@ export default function Editor({
 )}
 
 					{/* Editor component */}
-					<div className="flex-1 overflow-y-auto bg-[#151823]">
+					<div className="flex-1 min-h-0  bg-[#151823]">
 						<ReactQuill
+							style={{ height: "calc(100% - 100px)" }}
 							forwardedRef={quillRef}
 							theme="snow"
 							value={content}
 							onChange={setContent}
 							modules={modules}
 							formats={formats}
-							className="h-full"
+							
 							readOnly={!allowEditing}
 						/>
 					</div>
 
 					{/* Footer section */}
-					<div className="border-t border-[#2a3142] p-4 bg-[#1a1f2e]">
+					<div className="border-t absolute bottom-0 w-full border-[#2a3142] p-4 bg-[#1a1f2e]">
 						<div className="flex items-center justify-between text-gray-300">
 							<WordCount content={content} />
 							<span className="text-sm">

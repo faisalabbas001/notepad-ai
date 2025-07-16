@@ -15,9 +15,9 @@ export default function Home() {
         // initial={{ opacity: 0, y: 20 }}
         // animate={{ opacity: 1, y: 0 }}
         // transition={{ duration: 0.5 }}
-        className="relative"
+        className="relative min-h-[calc(100vh-72px)] mb-12"
       >
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+        <div className="absolute inset-0 h-full bg-grid-pattern opacity-[0.05] pointer-events-none " />
         <Suspense fallback={<div><Loader /></div>}>
           <Editor />
         </Suspense>
