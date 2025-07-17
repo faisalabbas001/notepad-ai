@@ -3,6 +3,7 @@ import { Switch as HeadlessUISwitch } from '@headlessui/react';
 import { XMarkIcon, QuestionMarkCircleIcon, ExclamationCircleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import ReactDOM from "react-dom";
 
 interface SaveModalProps {
   onClose: () => void;
@@ -91,8 +92,10 @@ export default function SaveModal({
       document.body.style.overflow = 'auto';
     };
   }, []);
-  return (
-    <div className="fixed top-0 bottom-0 w-full h-screen inset-0 z-50">
+
+  // Render the modal using a portal
+  return ReactDOM.createPortal(
+    <div className="fixed top-0 left-0 w-full h-screen z-50">
       <div className="fixed top-0 bottom-0 w-full h-screen  inset-0 bg-[#1a1f2e]/80 backdrop-blur-md  " />
       
       <div className="relative h-full flex items-center justify-center overflow-hidden p-4">
@@ -256,6 +259,7 @@ export default function SaveModal({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    typeof window !== "undefined" ? document.body : (null as any)
   );
 }

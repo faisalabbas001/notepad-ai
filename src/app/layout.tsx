@@ -1,9 +1,11 @@
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/layout/Navigation";
 import Script from "next/script";
 import Footer from "@/components/Footer";
+import AppWrapper from "@/components/AppWrapper";
 
 const inter = Inter({
 	subsets: ["latin"],
@@ -104,16 +106,15 @@ export default function RootLayout({
 					<div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-transparent to-black/80" />
 				</div>
 
-				{/* Main content */}
-				<div className="relative z-10 flex flex-col min-h-screen">
+				<AppWrapper>
 					<Navigation />
-					<main className="h-[calc(100vh-4rem)] mt-16 ">
+					<main className="h-screen relative ">
 						<div className=" px-8 lg:px-12  backdrop-blur-[3px]">
 							{children}
 							<Footer />
 						</div>
 					</main>
-				</div>
+				</AppWrapper>
 			</body>
 		</html>
 	);

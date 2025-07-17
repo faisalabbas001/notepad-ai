@@ -854,8 +854,8 @@ export default function Editor({
 
 	return (
 		<>
-			<div className={`flex flex-col main-container h-[calc(100vh-72px)] min-h-0 bg-[#1a1f2e]/90 backdrop-blur-sm rounded-lg overflow-hidden mb-12 border border-[#2a3142] shadow-2xl ${
-				(showSaveModal || showShareModal) ? 'blur-sm' : ''
+			<div className={`flex flex-col main-container  h-[calc(100vh-72px)] min-h-0 bg-[#1a1f2e]/90 backdrop-blur-sm rounded-lg overflow-hidden mb-12 border border-[#2a3142] shadow-2xl ${
+				(showSaveModal || showShareModal) ? 'blur-md ' : ''
 			}`}>
 				{/* Header section */}
 				<div className="flex items-center justify-between flex-wrap gap-2 p-3 sm:p-4 md:p-6 border-b border-[#2a3142] bg-[#1a1f2e] ">

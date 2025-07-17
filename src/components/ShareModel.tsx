@@ -3,6 +3,7 @@ import { XMarkIcon, QuestionMarkCircleIcon, ClipboardIcon, LockClosedIcon, KeyIc
 import { Switch as HeadlessUISwitch } from '@headlessui/react';
 import QRCode from 'react-qr-code';
 import { toast } from 'react-hot-toast';
+import ReactDOM from "react-dom";
 
 interface ShareModalProps {
   onClose: () => void;
@@ -179,7 +180,7 @@ export default function ShareModal({
   }, []);
 
   // Main share modal content
-  return (
+  const modalContent = (
     <div className="fixed top-0 bottom-0 w-full h-screen inset-0 z-50">
       <div className="fixed top-0 bottom-0 w-full h-screen bg-[#1a1f2e]/80 backdrop-blur-md" />
       
@@ -269,5 +270,11 @@ export default function ShareModal({
       </div>
     </div>
   );
+
+  // Use portal to render at the end of <body>
+  if (typeof window !== "undefined") {
+    return ReactDOM.createPortal(modalContent, document.body);
+  }
+  return null;
 }
    

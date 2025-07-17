@@ -41,7 +41,7 @@ export default function Navigation() {
 
 	return (
 		<div ref={navRef}>
-			<nav className={`fixed top-0 left-0 right-0 z-50 ${
+			<nav className={`sticky top-0 left-0 right-0 z-20 ${
 				scrolled ? 'bg-[#1a1f2e]/95 backdrop-blur-md shadow-lg' : 'bg-transparent'
 			}`}>
 				<div className="max-w-7xl mx-auto">
