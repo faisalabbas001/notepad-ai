@@ -118,6 +118,7 @@ export default function Editor({
 	const [isSaved, setIsSaved] = useState(false);
 	const [shareUrl, setShareUrl] = useState("");
 	const [currentShareId, setCurrentShareId] = useState<string | null>(null);
+	const [isMobile, setIsMobile] = useState(false);
 
 	// Initialize content from props if provided
 	useEffect(() => {
@@ -852,6 +853,14 @@ export default function Editor({
 		}
 	}, []);
 
+	// Detect mobile screen size
+	useEffect(() => {
+		const checkMobile = () => setIsMobile(window.innerWidth < 640); // Tailwind's sm breakpoint
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+		return () => window.removeEventListener('resize', checkMobile);
+	}, []);
+
 	return (
 		<>
 			<div className={`flex flex-col main-container  h-[calc(100vh-72px)] min-h-0 bg-[#1a1f2e]/90 backdrop-blur-sm rounded-lg overflow-hidden mb-12 border border-[#2a3142] shadow-2xl ${
@@ -956,19 +965,21 @@ export default function Editor({
 							border-bottom: 1px solid #2a3142 !important;
 							background: #1a1f2e !important;
 							padding: 1rem !important;
+							font-size: 1rem !important; /* Ensure consistent font size */
 						}
 
 						.ql-container.ql-snow {
 							border: none !important;
 							background: #151823 !important;
 							color: #e5e7eb !important;
+							font-size: 1rem !important; /* Ensure consistent font size */
 						}
 
 						.ql-editor {
-							padding: 2rem !important;
+							padding: 1rem !important;
 							min-height: 300px !important;
 							color: #e5e7eb !important;
-							font-size: 16px !important;
+							font-size: 1rem !important; /* Ensure consistent font size */
 							line-height: 1.6 !important;
 						}
 
@@ -1018,95 +1029,178 @@ export default function Editor({
 						}
 
 						.ql-formats {
-							margin-right: 15px !important;
+							margin-right: 5px !important;
 						}
 
 						/* Toolbar separator */
 						.ql-formats:not(:last-child) {
 							border-right: 1px solid #2a3142 !important;
-							padding-right: 15px !important;
+							padding-right: 4px !important;
 						}
 					`}</style>
 
-					{/* Find/Replace toolbar with dark theme */}
+					{/* Find/Replace toolbar/modal with dark theme */}
 					{showFindReplace && (
-  <div className="bg-[#1a1f2e] text-white border-b border-[#2a3142] p-2 sm:p-4 flex flex-col gap-2 sm:gap-4 z-50">
-    {/* Search row */}
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-      <div className="flex-1 flex items-center gap-2 bg-[#151823] rounded-lg border border-[#2a3142] w-full">
-        <div className="px-2 sm:px-3 py-1 sm:py-2">
-          <MagnifyingGlassIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+  isMobile ? (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-60">
+      <div className="relative w-[95vw] max-w-md mx-auto bg-[#1a1f2e] text-white rounded-xl shadow-2xl border border-[#2a3142] p-4 pt-10 sm:p-6  animate-fade-in">
+        {/* Close icon top-right */}
+        <button
+          onClick={() => setShowFindReplace(false)}
+          className="absolute top-1 right-2 p-2 rounded-full hover:bg-[#151823] text-gray-400 hover:text-[#4d9fff]"
+          title="Close"
+        >
+          <XMarkIcon className="h-5 w-5" />
+        </button>
+        {/* Search row */}
+        <div className="flex flex-col gap-4 mt-1">
+          <div className="flex items-center gap-2 bg-[#151823] rounded-lg border border-[#2a3142] w-full">
+            <div className="px-3 py-2">
+              <MagnifyingGlassIcon className="h-5 w-5 text-gray-400" />
+            </div>
+            <input
+              ref={findInputRef}
+              type="text"
+              value={findText}
+              onChange={handleFindInputChange}
+              placeholder="Find..."
+              className="flex-1 bg-transparent border-none focus:outline-none text-gray-100 placeholder-gray-500 py-2 pr-3 text-base"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleFindPrev}
+              className="p-2 hover:bg-[#151823] rounded-lg text-gray-400 hover:text-[#4d9fff] disabled:opacity-50 disabled:hover:text-gray-400"
+              disabled={findResults.length === 0}
+              title="Previous"
+            >
+              <ChevronLeftIcon className="h-5 w-5" />
+            </button>
+            <button
+              onClick={handleFindNext}
+              className="p-2 hover:bg-[#151823] rounded-lg text-gray-400 hover:text-[#4d9fff] disabled:opacity-50 disabled:hover:text-gray-400"
+              disabled={findResults.length === 0}
+              title="Next"
+            >
+              <ChevronRightIcon className="h-5 w-5" />
+            </button>
+            <span className="text-sm text-gray-400">
+              {findResults.length > 0 ? `${currentFindIndex + 1} of ${findResults.length}` : "No results"}
+            </span>
+          </div>
+          {/* Replace row */}
+          <div className="flex items-center gap-2 bg-[#151823] rounded-lg border border-[#2a3142] w-full">
+            <div className="px-3 py-2">
+              <ClipboardIcon className="h-5 w-5 text-gray-400" />
+            </div>
+            <input
+              type="text"
+              value={replaceText}
+              onChange={(e) => setReplaceText(e.target.value)}
+              placeholder="Replace with..."
+              className="flex-1 bg-transparent border-none focus:outline-none text-gray-100 placeholder-gray-500 py-2 pr-3 text-base"
+            />
+          </div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={handleReplace}
+              disabled={findResults.length === 0}
+              className="px-4 py-2 bg-[#151823] hover:bg-[#1f2937] text-gray-100 rounded-lg border border-[#2a3142] disabled:opacity-50 disabled:hover:bg-[#151823] text-base"
+            >
+              Replace
+            </button>
+            <button
+              onClick={handleReplaceAll}
+              disabled={findResults.length === 0}
+              className="px-4 py-2 bg-[#151823] hover:bg-[#1f2937] text-gray-100 rounded-lg border border-[#2a3142] disabled:opacity-50 disabled:hover:bg-[#151823] text-base"
+            >
+              Replace All
+            </button>
+          </div>
         </div>
-        <input
-          ref={findInputRef}
-          type="text"
-          value={findText}
-          onChange={handleFindInputChange}
-          placeholder="Find..."
-          className="flex-1 bg-transparent border-none focus:outline-none text-gray-100 placeholder-gray-500 py-1 sm:py-2 pr-2 sm:pr-3 text-sm sm:text-base"
-        />
       </div>
-      <div className="flex items-center gap-1 sm:gap-2">
-        <button
-          onClick={handleFindPrev}
-          className="p-1 sm:p-2 hover:bg-[#151823] rounded-lg text-gray-400 hover:text-[#4d9fff] disabled:opacity-50 disabled:hover:text-gray-400"
-          disabled={findResults.length === 0}
-        >
-          <ChevronLeftIcon className="h-4 w-4 sm:h-5 sm:w-5" />
-        </button>
-        <button
-          onClick={handleFindNext}
-          className="p-1 sm:p-2 hover:bg-[#151823] rounded-lg text-gray-400 hover:text-[#4d9fff] disabled:opacity-50 disabled:hover:text-gray-400"
-          disabled={findResults.length === 0}
-        >
-          <ChevronRightIcon className="h-4 w-4 sm:h-5 sm:w-5" />
-        </button>
-        <span className="text-xs sm:text-sm text-gray-400">
-          {findResults.length > 0
-            ? `${currentFindIndex + 1} of ${findResults.length}`
-            : "No results"}
-        </span>
-      </div>
-      <button
-        onClick={() => setShowFindReplace(false)}
-        className="p-1 sm:p-2 hover:bg-[#151823] rounded-lg text-gray-400 hover:text-[#4d9fff]"
-      >
-        <XMarkIcon className="h-4 w-4 sm:h-5 sm:w-5" />
-      </button>
     </div>
-
-    {/* Replace row */}
-    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
-      <div className="flex-1 flex items-center gap-2 bg-[#151823] rounded-lg border border-[#2a3142] w-full">
-        <div className="px-2 sm:px-3 py-1 sm:py-2">
-          <ClipboardIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+  ) : (
+    <div className="bg-[#1a1f2e] text-white border-b border-[#2a3142] p-2 sm:p-4 flex flex-col gap-2 sm:gap-4">
+      {/* Search row */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div className="flex-1 flex items-center gap-2 bg-[#151823] rounded-lg border border-[#2a3142] w-full">
+          <div className="px-2 sm:px-3 py-1 sm:py-2">
+            <MagnifyingGlassIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+          </div>
+          <input
+            ref={findInputRef}
+            type="text"
+            value={findText}
+            onChange={handleFindInputChange}
+            placeholder="Find..."
+            className="flex-1 bg-transparent border-none focus:outline-none text-gray-100 placeholder-gray-500 py-1 sm:py-2 pr-2 sm:pr-3 text-sm sm:text-base"
+          />
         </div>
-        <input
-          type="text"
-          value={replaceText}
-          onChange={(e) => setReplaceText(e.target.value)}
-          placeholder="Replace with..."
-          className="flex-1 bg-transparent border-none focus:outline-none text-gray-100 placeholder-gray-500 py-1 sm:py-2 pr-2 sm:pr-3 text-sm sm:text-base"
-        />
+        <div className="flex justify-between items-center gap-1 sm:gap-2">
+          <button
+            onClick={handleFindPrev}
+            className="p-1 sm:p-2 hover:bg-[#151823] rounded-lg text-gray-400 hover:text-[#4d9fff] disabled:opacity-50 disabled:hover:text-gray-400"
+            disabled={findResults.length === 0}
+            title="Previous"
+          >
+            <ChevronLeftIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+          </button>
+          <button
+            onClick={handleFindNext}
+            className="p-1 sm:p-2 hover:bg-[#151823] rounded-lg text-gray-400 hover:text-[#4d9fff] disabled:opacity-50 disabled:hover:text-gray-400"
+            disabled={findResults.length === 0}
+            title="Next"
+          >
+            <ChevronRightIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+          </button>
+          <span className="text-xs sm:text-sm text-gray-400">
+            {findResults.length > 0
+              ? `${currentFindIndex + 1} of ${findResults.length}`
+              : "No results"}
+          </span>
+          <button
+            onClick={() => setShowFindReplace(false)}
+            className="p-1 sm:p-2 hover:bg-[#151823] rounded-lg text-gray-400 hover:text-[#4d9fff]"
+            title="Close"
+          >
+            <XMarkIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+          </button>
+        </div>
       </div>
-      <div className="flex items-center gap-1 sm:gap-2">
-        <button
-          onClick={handleReplace}
-          disabled={findResults.length === 0}
-          className="px-2 sm:px-4 py-1 sm:py-2 bg-[#151823] hover:bg-[#1f2937] text-gray-100 rounded-lg border border-[#2a3142] disabled:opacity-50 disabled:hover:bg-[#151823] text-xs sm:text-base"
-        >
-          Replace
-        </button>
-        <button
-          onClick={handleReplaceAll}
-          disabled={findResults.length === 0}
-          className="px-2 sm:px-4 py-1 sm:py-2 bg-[#151823] hover:bg-[#1f2937] text-gray-100 rounded-lg border border-[#2a3142] disabled:opacity-50 disabled:hover:bg-[#151823] text-xs sm:text-base"
-        >
-          Replace All
-        </button>
+      {/* Replace row */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4">
+        <div className="flex-1 flex items-center gap-2 bg-[#151823] rounded-lg border border-[#2a3142] w-full">
+          <div className="px-2 sm:px-3 py-1 sm:py-2">
+            <ClipboardIcon className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400" />
+          </div>
+          <input
+            type="text"
+            value={replaceText}
+            onChange={(e) => setReplaceText(e.target.value)}
+            placeholder="Replace with..."
+            className="flex-1 bg-transparent border-none focus:outline-none text-gray-100 placeholder-gray-500 py-1 sm:py-2 pr-2 sm:pr-3 text-sm sm:text-base"
+          />
+        </div>
+        <div className="flex items-center gap-1 sm:gap-2">
+          <button
+            onClick={handleReplace}
+            disabled={findResults.length === 0}
+            className="px-2 sm:px-4 py-1 sm:py-2 bg-[#151823] hover:bg-[#1f2937] text-gray-100 rounded-lg border border-[#2a3142] disabled:opacity-50 disabled:hover:bg-[#151823] text-xs sm:text-base"
+          >
+            Replace
+          </button>
+          <button
+            onClick={handleReplaceAll}
+            disabled={findResults.length === 0}
+            className="px-2 sm:px-4 py-1 sm:py-2 bg-[#151823] hover:bg-[#1f2937] text-gray-100 rounded-lg border border-[#2a3142] disabled:opacity-50 disabled:hover:bg-[#151823] text-xs sm:text-base"
+          >
+            Replace All
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  )
 )}
 
 					{/* Editor component */}
